@@ -12,11 +12,36 @@
 
 <body>
 	<main id="vue">
+
+
 		<div>
-			<div v-for="man of json">{{man.name}} {{man.surname}} {{man.age}} {{man.email}} {{man.address.street}}<br />
-				<!--działa-->
+			<div v-for="man of json" class="friend">
+				<img :src=man.photo :alt='man.name +" "+ man.surname'><br>
+				{{man.name}} {{man.surname}}, {{man.age}} lat
+
+				<div v-if="changeThis">
+
+					{{man.email}}<br>
+					{{man.address.street}}, {{man.address.zipcode}}, {{man.address.city}}<br>
+
+					<div v-if="!man.friend">
+						<button @click="addFriend">Dodaj znajomego</button>
+					</div>
+
+					{{man.friend}}<br>
+					{{man.likes}}<br>
+
+					<div v-for="interest of man.interests">
+						{{interest}}
+					</div>
+
+				</div>
+
 			</div>
 		</div>
+		<button @click="changeView">{{button}}</button>
+
+
 	</main>
 	<script src="../js/index.js"></script>
 </body>

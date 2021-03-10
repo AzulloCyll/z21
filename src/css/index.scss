@@ -1,2 +1,11 @@
 //normalize import from node_modules
 @import "../../node_modules/normalize.css/normalize";
+
+.friend {
+  margin: 30px;
+  display: inline-block;
+}
+
+body {
+  padding: 50px;
+}

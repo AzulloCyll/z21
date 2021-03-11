@@ -12,10 +12,10 @@
 
 <body>
 	<main id="vue">
-
+		<button @click="changeView">{{button}}</button>
 
 		<div>
-			<div v-for="man of json" class="friend">
+			<div v-for="(man, index) of json" class="friend" v-bind:class="{'--yes': man.friend == true}">
 				<img :src=man.photo :alt='man.name +" "+ man.surname'><br>
 				{{man.name}} {{man.surname}}, {{man.age}} lat
 
@@ -25,11 +25,23 @@
 					{{man.address.street}}, {{man.address.zipcode}}, {{man.address.city}}<br>
 
 					<div v-if="!man.friend">
-						<button @click="addFriend">Dodaj znajomego</button>
+						<button @click="addFriend(index)">Dodaj znajomego</button>
 					</div>
 
-					{{man.friend}}<br>
-					{{man.likes}}<br>
+				<br>
+
+					<div class="inline" v-bind:class="{'hide': man.likes == 0}">
+						<button @click="minusLike(index)">-</button>
+					</div>
+
+					{{man.likes}}
+
+					<div class="inline">
+						<button v-on:click="plusLike(index)" v-bind:disabled="man.likes == 21">+</button>
+					</div>
+
+					<br><br>
+					
 
 					<div v-for="interest of man.interests">
 						{{interest}}
@@ -39,8 +51,7 @@
 
 			</div>
 		</div>
-		<button @click="changeView">{{button}}</button>
-
+		
 
 	</main>
 	<script src="../js/index.js"></script>

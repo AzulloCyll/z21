@@ -18,12 +18,18 @@ const app = new Vue({
         this.button = "Widok Pełny";
       }
     },
-    addFriend(event) {
-      // this.json[2].friend = true;
-      console.log(event.target.parentElement);
-      console.log(this.json[1].friend);
-      this.json[1].friend = true;
-      console.log(this.json[1].friend);
+
+    addFriend(index) {
+      this.json[index].friend = true;
+      // index kurła!!!!!
+    },
+
+    plusLike(index) {
+      this.json[index].likes++;
+    },
+
+    minusLike(index) {
+      this.json[index].likes--;
     },
   },
 });

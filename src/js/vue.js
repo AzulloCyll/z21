@@ -7,6 +7,22 @@ const app = new Vue({
     json: data.people,
     changeThis: false,
     button: "Widok Pełny",
+    newInterest: "",
+    newUser: {
+      name: "",
+      surname: "",
+      age: "",
+      email: "",
+      address: {
+        street: "",
+        zipcode: "",
+        city: "",
+      },
+      likes: 0,
+      friend: false,
+      photo: "",
+      interests: [],
+    },
   },
   methods: {
     changeView() {
@@ -30,6 +46,16 @@ const app = new Vue({
 
     minusLike(index) {
       this.json[index].likes--;
+    },
+
+    addInterest(index) {
+      this.json[index].interests.push(this.newInterest);
+      this.newInterest = "";
+    },
+
+    addNewUser() {
+      this.json.push(this.newUser);
+      console.log(this.newUser);
     },
   },
 });

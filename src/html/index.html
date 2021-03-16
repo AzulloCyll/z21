@@ -13,6 +13,22 @@
 <body>
 	<main id="vue">
 		<button @click="changeView">{{button}}</button>
+		<div>
+			<hr>
+			<div>Dodaj znajomego:</div>
+
+			<label for="newName">Imię:</label>
+			<input type="text" name="newName" v-model=newUser.name><br>
+
+			<label for="newSurname">Nazwisko:</label>
+			<input type="text" name="newSurname" v-model=newUser.surname><br>
+
+			<label for="newAge">Wiek:</label>
+			<input type="number" name="newAge" v-model=newUser.age><br>
+
+			<button type="button" @click="addNewUser">Dodaj znajomego</button>
+		</div>
+		<hr>
 
 		<div>
 			<div v-for="(man, index) of json" class="friend" v-bind:class="{'--yes': man.friend == true}">
@@ -22,13 +38,15 @@
 				<div v-if="changeThis">
 
 					{{man.email}}<br>
-					{{man.address.street}}, {{man.address.zipcode}}, {{man.address.city}}<br>
+					<div v-if="man.address.street && man.address.zipcode && man.address.city">
+						{{man.address.street}}, {{man.address.zipcode}}, {{man.address.city}}<br>
+					</div>
 
 					<div v-if="!man.friend">
 						<button @click="addFriend(index)">Dodaj znajomego</button>
 					</div>
 
-				<br>
+					<br>
 
 					<div class="inline" v-bind:class="{'hide': man.likes == 0}">
 						<button @click="minusLike(index)">-</button>
@@ -41,17 +59,19 @@
 					</div>
 
 					<br><br>
-					
 
 					<div v-for="interest of man.interests">
 						{{interest}}
 					</div>
 
-				</div>
+					<br>
 
+					<label for="interest">Dodaj zainteresowanie</label><br>
+					<input type="text" name="interest" v-model="newInterest" lazy>
+					<button v-on:click=" addInterest(index)" type="button">Dodaj</button>
+				</div>
 			</div>
 		</div>
-		
 
 	</main>
 	<script src="../js/index.js"></script>

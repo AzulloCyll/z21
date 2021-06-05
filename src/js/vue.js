@@ -5,9 +5,9 @@ const app = new Vue({
   el: "#vue",
   data: {
     json: data.people,
-    changeThis: false,
+    changeThis: true,
     button: "Widok Pełny",
-    newInterest: "",
+    newInterest: [],
     newUser: {
       name: "",
       surname: "",
@@ -35,27 +35,25 @@ const app = new Vue({
       }
     },
 
-    addFriend(index) {
-      this.json[index].friend = true;
-      // index kurła!!!!!
+    addFriend(man) {
+      man.friend = true;
     },
 
-    plusLike(index) {
-      this.json[index].likes++;
+    plusLike(man) {
+      man.likes++;
     },
 
-    minusLike(index) {
-      this.json[index].likes--;
+    minusLike(man) {
+      man.likes--;
     },
 
-    addInterest(index) {
-      this.json[index].interests.push(this.newInterest);
-      this.newInterest = "";
+    addInterest(man, index) {
+      man.interests.push(this.newInterest[index]);
+      this.newInterest = [];
     },
 
     addNewUser() {
       this.json.push(this.newUser);
-      console.log(this.newUser);
     },
   },
 });

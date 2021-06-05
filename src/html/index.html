@@ -31,7 +31,7 @@
 		<hr>
 
 		<div>
-			<div v-for="(man, index) of json" class="friend" v-bind:class="{'--yes': man.friend == true}">
+			<div v-for="(man, index) in json" class="friend" v-bind:class="{'--yes': man.friend == true}">
 				<img :src=man.photo :alt='man.name +" "+ man.surname'><br>
 				{{man.name}} {{man.surname}}, {{man.age}} lat
 
@@ -43,32 +43,32 @@
 					</div>
 
 					<div v-if="!man.friend">
-						<button @click="addFriend(index)">Dodaj znajomego</button>
+						<button @click="addFriend(man)">Dodaj znajomego</button>
 					</div>
 
 					<br>
 
 					<div class="inline" v-bind:class="{'hide': man.likes == 0}">
-						<button @click="minusLike(index)">-</button>
+						<button @click="minusLike(man)">-</button>
 					</div>
 
 					{{man.likes}}
 
 					<div class="inline">
-						<button v-on:click="plusLike(index)" v-bind:disabled="man.likes == 21">+</button>
+						<button v-on:click="plusLike(man)" v-bind:disabled="man.likes == 21">+</button>
 					</div>
 
 					<br><br>
 
-					<div v-for="interest of man.interests">
+					<div v-for="(interest, index) in man.interests">
 						{{interest}}
 					</div>
 
 					<br>
 
 					<label for="interest">Dodaj zainteresowanie</label><br>
-					<input type="text" name="interest" v-model="newInterest" lazy>
-					<button v-on:click=" addInterest(index)" type="button">Dodaj</button>
+					<input type="text" name="interest" v-model="newInterest[index]" lazy>
+					<button v-on:click="addInterest(man,index)" type="button">Dodaj</button>
 				</div>
 			</div>
 		</div>

@@ -2,23 +2,30 @@
 @import "../../node_modules/normalize.css/normalize";
 
 .friend {
-  margin: 30px;
-  display: inline-block;
-  padding: 40px;
+	margin: 30px;
+	display: inline-block;
+	padding: 40px;
 }
 
 body {
-  padding: 50px;
+	padding: 50px;
 }
 
 .--yes {
-  background-color: rgb(239, 239, 255);
+	background-color: rgb(239, 239, 255);
 }
 
 .inline.hide {
-  display: none;
+	display: none;
 }
 
 .inline {
-  display: inline;
+	display: inline;
+}
+
+.active {
+	background-color: black;
+	color: white;
+	border: 2px solid black;
+	border-radius: 3px;
 }

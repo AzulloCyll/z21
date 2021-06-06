@@ -1,4 +1,5 @@
 import Vue from "vue/dist/vue";
+
 import data from "../json/people.json";
 
 const app = new Vue({
@@ -6,7 +7,7 @@ const app = new Vue({
   data: {
     json: data.people,
     changeThis: true,
-    button: "Widok Pełny",
+    button: "Widok zwinięty",
     newInterest: [],
     newUser: {
       name: "",
@@ -23,7 +24,13 @@ const app = new Vue({
       photo: "",
       interests: [],
     },
+    isActive: false,
+    filteredData: [],
   },
+  created() {
+    this.filteredData = this.json.slice();
+  },
+
   methods: {
     changeView() {
       if (!this.changeThis) {
@@ -31,7 +38,7 @@ const app = new Vue({
         this.button = "Widok zwinięty";
       } else {
         this.changeThis = false;
-        this.button = "Widok Pełny";
+        this.button = "Widok pełny";
       }
     },
 
@@ -54,6 +61,29 @@ const app = new Vue({
 
     addNewUser() {
       this.json.push(this.newUser);
+    },
+
+    filterByName(event) {
+      this.isActive = event.target.value;
+      this.filteredData = this.json.slice();
+
+      switch (this.isActive) {
+        case "nameAZ":
+          this.filteredData.sort((a, b) => (a.name > b.name) ? 1 : -1);
+          break;
+        case "nameZA":
+          this.filteredData.sort((a, b) => (a.name < b.name) ? 1 : -1);
+          break;
+        case "surnameAZ":
+          this.filteredData.sort((a, b) => (a.surname > b.surname) ? 1 : -1);
+          break;
+        case "surnameZA":
+          this.filteredData.sort((a, b) => (a.surname < b.surname) ? 1 : -1);
+          break;
+      }
+
+
+
     },
   },
 });

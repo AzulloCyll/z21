@@ -12,7 +12,7 @@
 
 <body>
 	<main id="vue">
-		<button @click="changeView">{{button}}</button>
+
 		<div>
 			<hr>
 			<div>Dodaj znajomego:</div>
@@ -29,9 +29,22 @@
 			<button type="button" @click="addNewUser">Dodaj znajomego</button>
 		</div>
 		<hr>
+		<button @click="changeView">{{button}}</button>
+		<label for="sort">Filtruj po imieniu: </label>
+
+		<button type="button" v-bind:class="{active: isActive === 'nameAZ'}" value="nameAZ"
+			@click="filterByName($event)">Od A do Z</button>
+		<button type="button" v-bind:class="{active: isActive === 'nameZA'}" value="nameZA"
+			@click="filterByName($event)">Od Z do A</button>
+
+		<label for="sort">Filtruj po nazwisku: </label>
+		<button type="button" v-bind:class="{active: isActive === 'surnameAZ'}" value="surnameAZ"
+			@click="filterByName($event)">Od A do Z</button>
+		<button type="button" v-bind:class="{active: isActive === 'surnameZA'}" value="surnameZA"
+			@click="filterByName($event)">Od Z do A</button>
 
 		<div>
-			<div v-for="(man, index) in json" class="friend" v-bind:class="{'--yes': man.friend == true}">
+			<div v-for="(man, index) in filteredData" class="friend" v-bind:class="{'--yes': man.friend == true}">
 				<img :src=man.photo :alt='man.name +" "+ man.surname'><br>
 				{{man.name}} {{man.surname}}, {{man.age}} lat
 
